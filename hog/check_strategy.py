@@ -18,4 +18,20 @@ def check_strategy(strategy, goal = GOAL_SCORE):
 	...		if score != 15 or opponent_score != 20:
 	...			return 5
 	...
+	>>> check_strategy(fail_15_20)
+
+	>>>def fail_102_115(score, opponent_score):
+	...		if score == 102 and opponent_score == 115:
+	...			return 100
+	...		return 5
+	...
+
+	>>>check_strategy(fail_102_115)
+	>>>fail_102_115 == check_strategy(fail_102_115, 120)
+
+
+	for score in range(goal):
+		for opponent_score in range(goal):
+			num_rolls = strategy(score, opponent_score)
+			check_strategy_roll(score, opponent_score, num_rolls)
 
