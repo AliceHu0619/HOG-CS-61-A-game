@@ -300,6 +300,20 @@ def final_strategy(score, opponent_score):
 
 
 
+@main
+
+def run(*args):
+	import argparse
+
+	parser = argparse.ArgumentParser(description = 'play hog')
+	parser.add_argument('__run run_experiments', '-r', action = 'store_true', help = 'run strategy experiment')
+	args = parser.parse_args()
+
+	if args.run_experiments:
+		run_experiments()
+
+
+
 
 
 
