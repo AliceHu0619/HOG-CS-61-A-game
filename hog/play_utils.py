@@ -168,12 +168,26 @@ def check_play_function(hog):
 			print('(error_id:{0})'.format(hash(trace[incorrect], incorrect, i)))
 
 			break
-			
 
 
 
 
 
+def make_solution_traces(hog):
+	random.seed(TEST_SEED)
+	sol_traces = [ ]
+
+	for i in range(NUM_TESTS):
+		strat0, strat1 = make_random_strat(), make_random_strat()
+		trace = play_traced(hog, strat0, strat1)
+		sol_traces.append([hash(state) for state in trace])
+
+	return sol_traces
+
+
+def compare_trace(trace, sol):
+	i = 0
+	while 
 
 
 
