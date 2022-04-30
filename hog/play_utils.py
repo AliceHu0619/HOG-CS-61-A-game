@@ -187,8 +187,62 @@ def make_solution_traces(hog):
 
 def compare_trace(trace, sol):
 	i = 0
-	while 
+	while i < min(len(trace), len(sol)):
+		state, sol_state = trace[i], sol[i]
+		if not state.is_correct(sol_state):
+			return i
 
+		i += 1
+
+	if len(trace) != len(sol):
+		return len(trace)
+
+	return -1
+
+
+
+def print_trace(trace, incorrect = None):
+	print('-'*64)
+	print('{0:> 10{1 : >8}){2:>8}    {3}'.format('','score0', 'score1', 'turn summary))
+
+
+	print('-'*64)
+
+	for i, turn in enumerate(trace):
+		if incorrect is not None and i != incorrect:
+			continue
+
+		s0_change = turn.score0_final - turn.score0
+		s1_change = turn.score1_final - turn.score1
+
+		print('{0 : <10}{1:8}{2:8}    {3}'.format('Turn {0}:'.format(i),turn.score0, turn.score1, turn.turn_summary))
+
+		print('{0:<10}{1:>8}{2:>8}        {3}'.format(
+            '',
+            '' if s0_change == 0 else '{0:+}'.format(s0_change),
+            '' if s1_change == 0 else '{0:+}'.format(s1_change),
+            turn.turn_rolls))
+        print('{0:<10}{1:8}{2:8}    {3}'.format(
+            '',
+            turn.score0_final,
+            turn.score1_final,
+            turn.dice_summary))
+        print('-'*64)
+    	print('{0:<15}{1:3}{2:8}'.format(
+        'Final Score:',
+        turn.score0_final,
+        turn.score1_final))
+    	print('-'*64)
+
+
+def load_trace_from_file(path):
+	with open(path) as f:
+		return eval(f.read())
+
+
+def write_trace_to_file(path, traces):
+	with open(path, 'w') as f:
+		f.write(str(traces))
 
 
 
